@@ -1,7 +1,11 @@
 var mysql = require("mysql");
 var sequelize = require("sequelize");
-const Slide = require("./schemas/slide.js");
+const db = require('./models').db;
 
-function create (data){
-   Slide.create(data);
+module.exports = class Queries {
+  
+   create(slide){
+     
+   }
+   
 }
