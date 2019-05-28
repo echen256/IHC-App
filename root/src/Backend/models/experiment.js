@@ -7,54 +7,72 @@ module.exports = function(sequelize, DataTypes){
 
     const Experiment = sequelize.define('experiment', {
         slide : {
-            type : DataTypes.String,
-            references : Slide,
-            referencesKey : 'id'
+            type : DataTypes.INTEGER,
+            references : {
+                model : "slides",
+                key : 'id'
+            } ,
+            allowNull : false
+           
         },
         pretreatment : {
-            type : DataTypes.String,
-            references : Reagent, 
-            referencesKey : 'id'
+            type : DataTypes.INTEGER,
+            references : {
+                model : "reagents",
+                key : 'id'
+            } 
         } ,
         tissuePrimer : {
-            type : DataTypes.String,
-            references : Reagent, 
-            referencesKey : 'id'
+            type : DataTypes.INTEGER,
+            references : {
+                model : "reagents",
+                key : 'id'
+            } 
         }, 
         backgroundBlocker : {
-            type : DataTypes.String,
-            references : Reagent, 
-            referencesKey : 'id'
+            type : DataTypes.INTEGER,
+            references : {
+                model : "reagents",
+                key : 'id'
+            } 
         },
         antibody : {
-            type : DataTypes.String,
-            references : Reagent, 
-            referencesKey : 'id'
+            type : DataTypes.INTEGER,
+            references : {
+                model : "reagents",
+                key : 'id'
+            } 
         },
         linker : {
-            type : DataTypes.String,
-            references : Reagent, 
-            referencesKey : 'id'
+            type : DataTypes.INTEGER,
+            references : {
+                model : "reagents",
+                key : 'id'
+            } 
         },
         tracer : {
-            type : DataTypes.String,
-            references : Reagent, 
-            referencesKey : 'id'
+            type : DataTypes.INTEGER,
+            references : {
+                model : "reagents",
+                key : 'id'
+            } 
         },
         chromogen : {
-            type : DataTypes.String,
-            references : Reagent, 
-            referencesKey : 'id'
+            type : DataTypes.INTEGER,
+            references : {
+                model : "reagents",
+                key : 'id'
+            } 
         },
         counterStain : {
-            type : DataTypes.String,
-            references : Reagent, 
-            referencesKey : 'id'
+            type : DataTypes.INTEGER,
+            references : {
+                model : "reagents",
+                key : 'id'
+            } 
         }
 
 
     });
-    Experiment.hasMany(Slide);
-    Experiment.hasMany(Reagent);
     return Experiment;
 }

@@ -19,7 +19,10 @@ module.exports = function (app) {
         res.send({working: "TRUE"})
     });
 
-    app.post
+    app.post("/submit/experiment", function(req,res){
+        db.Experiment.create(req.body).then(res => { console.log("Experiment created " + res) }).catch(error => {console.log(error)});
+        res.json({ message: "post complete" });
+    });
 
     app.post("/check/reagent", function(req,res){
         var id = req.body.id;

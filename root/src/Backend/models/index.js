@@ -21,6 +21,7 @@ var db = {};
 
 db.Reagent = Reagent(sequelize,Sequelize.DataTypes);
 db.Slide = Slide(sequelize,Sequelize.DataTypes);
+db.Experiment = Experiment(sequelize, Sequelize.DataTypes);
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 

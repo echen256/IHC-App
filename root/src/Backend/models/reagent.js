@@ -2,6 +2,7 @@
 module.exports = function(sequelize, DataTypes){
 
     const Reagent = sequelize.define('reagent', {
+        
         name: {
             type: DataTypes.STRING,
             allowNull: false
