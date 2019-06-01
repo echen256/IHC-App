@@ -5,7 +5,7 @@ import TextField from "../TextField/TextField"
 
 export class TableCell extends Component{
     render(){
-        return (<div className = "customTableCell">{this.props.item}</div>);
+        return (<th className = {this.props.shouldFlexGrow ? "flexGrow1 customTableCell" : "customTableCell"}>{this.props.item}</th>);
     }
 }
 
@@ -30,8 +30,8 @@ export class CustomTable extends Component {
             var row =  [];
             for (var j = 0; j < table[i].length; j++){
                 var item = table[i][j];
-                var cell = item !== "" ? <TableCell item = {item}/> : <TableCell item = {<TextField i = {i} j = {j} parent = {this}/>}/>;
-                row.push(cell);
+
+                row.push(item);
             }
             htmlTable.push(<div className = "flexRow">{row}</div>)
        

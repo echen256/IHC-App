@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes){
             allowNull: false
         },
         tissueType : {
-            types : DataTypes.STRING,
+            type : DataTypes.STRING,
             allowNull : false
         }, 
         reagent : {

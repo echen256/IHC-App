@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import { TextField } from "./../../Components/TextField/TextField";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import "./../../../App.css";
-import { CustomTable } from "../../Components/CustomTable/CustomTable";
 
+
+import "./../../../App.css";
+import TextField  from "./../../Components/TextField/TextField";
+import {SubmitReagent} from "../../Components/SubmitReagent/SubmitReagent"
+import { CustomTable , TableCell} from "../../Components/CustomTable/CustomTable";
+import axios from 'axios';
+
+import {Reagent} from "./../../Components/Reagent/Reagent"
 
 
 
@@ -34,40 +34,68 @@ export class Main extends Component {
       <div className = "App">
 
         
-
-
-
-
         <div className = "vert-margin-5">
-        <CustomTable title = "Independent Variables" table =  { [
-            ["Tissue Type", "Dilution Factor", "Tested Reagent Type", "Tested Reagent Name", "Tested Reagent Lot",
-            "Tested Reagent Exp Date", "Tested Reagent Catalog Number", "Tested Reagent Notes"],
-            ["","","","","","","",""],
-        ]}/>
+        <table className = "vert-margin-5 customTable" >
+            <tr>
+              <div className = "tableTitle">
+                Experiment Conditions
+              </div>
+            </tr>
+            <tr className = 'flexRow'>
+              <TableCell shouldFlexGrow = {true} item = { "Tissue Type"}/>
+              <TableCell shouldFlexGrow = {true} item = { "Dilution Factor"}/> 
+              <TableCell shouldFlexGrow = {true} item = {"Tested Reagent Type"}/> 
+              <TableCell shouldFlexGrow = {true} item = { "Tested Reagent Name"}/> 
+              <TableCell shouldFlexGrow = {true} item = { "Tested Reagent Lot"}/> 
+              <TableCell shouldFlexGrow = {true} item = {"Tested Reagent Exp Date"}/> 
+              <TableCell shouldFlexGrow = {true} item = {"Tested Reagent Catalog Number"}/> 
+              <TableCell shouldFlexGrow = {true} item = { "Tested Reagent Notes"}/> 
+              <TableCell shouldFlexGrow = {false} item = { "Save"}/> 
+            </tr>
+
+            <tr className = 'flexRow'>
+              <TableCell shouldFlexGrow = {true} item = {  <TextField/>}/>
+              <TableCell shouldFlexGrow = {true} item = {  <TextField/>}/>
+              <TableCell shouldFlexGrow = {true} item = {  <TextField/>}/>
+              <TableCell shouldFlexGrow = {true} item = {  <TextField/>}/>
+              <TableCell shouldFlexGrow = {true} item = {  <TextField/>}/>
+              <TableCell shouldFlexGrow = {true} item = {  <TextField/>}/>
+              <TableCell shouldFlexGrow = {true} item = {  <TextField/>}/>
+              <TableCell shouldFlexGrow = {true} item = {  <TextField/>}/>
+              <TableCell shouldFlexGrow = {false} item = { <SubmitReagent/>}/> 
+            </tr>
+        </table>
+
+  
         </div>
 
 
 
-        <div className = "vert-margin-5">
-            <CustomTable title = "Dependent Variables" table =  { [
-              ["Reagent Type", "Reagent Name", "Reagent Catalog Number", "Reagent Lot", "Reagent Exp Date", "Reagent Incubation Time", "Reagent Notes"],
-              ["Pretreatment","","","","","",""],
-              ["Tissue Primer", "","","","","",""],
-              ["Background Blocker", "","","","","",""],
-              ["Antibody", "","","","","",""],
-              ["Linker","","","","","",""],
-              ["Trancer", "","","","","",""],
-              ["Chromogen", "","","","","",""],
-              ["Counter Stain", "","","","","",""],
-          ]} />
-        </div>
-      
+        <table className = "vert-margin-5 customTable" ><tr>
+              <div className = "tableTitle">
+                Reagents Used
+              </div>
+            </tr>
+            <tr className = 'flexRow'>
+                <TableCell shouldFlexGrow = {true} item = { "Reagent Type"}/> 
+                  <TableCell shouldFlexGrow = {true} item = {  "Reagent Name"}/>
+                    <TableCell shouldFlexGrow = {true} item = {  "Reagent Catalog Number"}/> 
+                      <TableCell shouldFlexGrow = {true} item = { "Reagent Lot"}/> 
+                        <TableCell shouldFlexGrow = {true} item = { "Reagent Exp Date"}/> 
+                          <TableCell shouldFlexGrow = {true} item = { "Reagent Incubation Time"}/>
+                              <TableCell shouldFlexGrow = {true} item = { "Reagent Notes"}/> 
+                              <TableCell shouldFlexGrow = {false} item = { "Save"}/> 
+            </tr>
+          <Reagent name = 'Tissue Primer'/>
+          <Reagent name = 'Background Blocker'/>
+          <Reagent name = 'Antibody'/>
+          <Reagent name = 'Linker'/>
+          <Reagent name = 'Tracer'/>
+          <Reagent name = 'Chromogen'/>
+          <Reagent name = 'Counterstain'/>
 
+        </table>
 
-
-      
-
-       
       </div>
     );
   }

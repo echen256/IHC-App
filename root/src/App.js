@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import './App.css';
 import { Main } from "./FrontEnd/Pages/Main/Main"
-
+import {Router, Switch, Route} from "react-router";
 import { Navbar } from "./FrontEnd/Components/Navbar/Navbar"
 
 export default class App extends Component{
@@ -11,7 +11,7 @@ export default class App extends Component{
     const response = await fetch('/routing');
     
     const body = await response.json();
-    console.log(body);
+    
     if (response.status !== 200) {
       throw Error(body.message) 
     }
@@ -20,6 +20,10 @@ export default class App extends Component{
   };
 
   render(){
+
+
+
+
     return (<div>
       <Navbar />
       <Main />

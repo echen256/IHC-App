@@ -7,10 +7,10 @@ export default class TextField extends Component{
     render(){
         return(<div>
                 <form >
-                    <input onChange = {this.updateTable.bind(this)}  className = "input" type = "text">
+                    <input className = "input" type = "text">
                     </input>
                 </form>
-                { this.state.showSuggestions ? this.populateFilteredSuggestionsList() : <div/>}
+               
              </div>
         );
     }

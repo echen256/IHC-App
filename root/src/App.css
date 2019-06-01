@@ -45,7 +45,7 @@
   background-color: #282c34;
   font-weight: 600;
   width: auto;
-
+  
 }
 
 
@@ -53,19 +53,31 @@
 .customTableCell{ 
   text-align: center ;
   padding: 5px;
-  color: #282c34 ;
+  color: #333 ;
   border-width: 1px;
-  border-style:solid;
-  border-color:  #282c34 ;
-  border-collapse: separate ;
-  display: inline-block;
+  border-style: solid;
+  border-color:  grey ;
   overflow-wrap: break-word;
   word-wrap: break-word;
   font-size: 10px;
   width: 5%;
-  flex-grow: 1;
+  
   min-height: 24px;
   
+}
+
+.customTable{
+  display: table;
+  border-collapse: collapse ;
+  border-spacing: 0;
+  width : 100%;
+}
+
+.flexGrow1{
+  flex-grow: 1;
+}
+.flexGrow0{
+  flex-grow: 0;
 }
 
 .vert-margin-5{
