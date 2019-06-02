@@ -6,7 +6,7 @@ var fs = require("fs");
 
 
 
-const sequelize = new Sequelize('ihc_db','root','q',{
+const sequelize = new Sequelize('ihc_db','dummy','q',{
     host : "localhost",
     dialect : 'mysql'
 })

@@ -6,18 +6,33 @@ import { CustomTable , TableCell} from "../../Components/CustomTable/CustomTable
 
 export class Reagent extends Component{
 
+    renderCells(){
+       
+        var cells = [];
+        cells.push( <TableCell shouldFlexGrow = {true} item = { this.props.name}/> );
+        for (var i = 0; i < this.props.numberOfTextFields;i++){
+            cells.push(<TableCell shouldFlexGrow = {true} item = {  <TextField/>}/> );
+        }
+        cells.push(<TableCell shouldFlexGrow = {false} item = { <SubmitReagent/>}/> );
+        this.setState({cells : cells});
+        return cells;
+    }
+
+    state = {
+        cells : []
+    }
+
+    componentDidMount(){
+        this.renderCells();
+    }
 
     render(){
         return(<tr className = "flexRow">
            
-                <TableCell shouldFlexGrow = {true} item = { this.props.name}/> 
-                  <TableCell shouldFlexGrow = {true} item = {  <TextField/>}/> 
-                    <TableCell shouldFlexGrow = {true} item = { <TextField/>}/> 
-                      <TableCell shouldFlexGrow = {true} item = { <TextField/>}/> 
-                        <TableCell shouldFlexGrow = {true} item = {<TextField/>}/> 
-                          <TableCell shouldFlexGrow = {true} item = { <TextField/>}/>
-                              <TableCell shouldFlexGrow = {true} item = { <TextField/>}/> 
-                              <TableCell shouldFlexGrow = {false} item = { <SubmitReagent/>}/> 
+               
+                    
+                    {this.state.cells}
+                              
             </tr>
 
         );

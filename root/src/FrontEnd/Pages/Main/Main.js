@@ -86,13 +86,13 @@ export class Main extends Component {
                               <TableCell shouldFlexGrow = {true} item = { "Reagent Notes"}/> 
                               <TableCell shouldFlexGrow = {false} item = { "Save"}/> 
             </tr>
-          <Reagent name = 'Tissue Primer'/>
-          <Reagent name = 'Background Blocker'/>
-          <Reagent name = 'Antibody'/>
-          <Reagent name = 'Linker'/>
-          <Reagent name = 'Tracer'/>
-          <Reagent name = 'Chromogen'/>
-          <Reagent name = 'Counterstain'/>
+          <Reagent name = 'Tissue Primer' numberOfTextFields = {6}/>
+          <Reagent name = 'Background Blocker' numberOfTextFields = {6}/>
+          <Reagent name = 'Antibody'  numberOfTextFields = {6}/>
+          <Reagent name = 'Linker'  numberOfTextFields = {6}/>
+          <Reagent name = 'Tracer'  numberOfTextFields = {6}/>
+          <Reagent name = 'Chromogen'  numberOfTextFields = {6}/>
+          <Reagent name = 'Counterstain'  numberOfTextFields = {6}/>
 
         </table>
 
