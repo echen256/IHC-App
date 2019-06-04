@@ -8,14 +8,13 @@ export default class TextField extends Component{
         this.recordData = this.recordData.bind(this);
     }
 
+    
     render(){
-        return(<div ref = "textfield">
-                <form >
-                    <input onChange = {this.recordData} className = "input" type = "text">
-
-                    </input>
-                </form>
-             </div>
+        
+        return(
+                <input onChange = {this.recordData} className = "input" type = "text">
+                </input>
+          
         );
     }
 
@@ -23,13 +22,11 @@ export default class TextField extends Component{
         return this.state.text;
     }
 
-    marker = "marker";
-
     state = {
         text : '',
-        autofillOptions : ["12345","7546546","4234"],
-        showSuggestions : true,
-        filteredSuggestions : []
+       // autofillOptions : ["12345","7546546","4234"],
+       // showSuggestions : true,
+       // filteredSuggestions : []
     }
  
     populateFilteredSuggestionsList(){
@@ -49,21 +46,16 @@ export default class TextField extends Component{
     recordData(event){
         var text = event.target.value;
         this.setState({text: text});
+        this.props.updateTextArray(this.props.i,text)
     }
 
     updateTable(event){
 
         var text = event.target.value;
-        this.state.filteredAutoFillOptions = this.state.autofillOptions.filter(x=> x.includes(text));
+       // this.state.filteredAutoFillOptions = this.state.autofillOptions.filter(x=> x.includes(text));
         console.log(this.state.filteredAutoFillOptions);
-
-
-       
         this.setState({text: text});
-        var table = this.props.parent.state.table;
-        var i = this.props.i;
-        var j = this.props.j;
-        table[i][j] = text;
+
     }
 
 }

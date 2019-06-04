@@ -9,7 +9,7 @@ export class SubmitReagent extends Component {
   render() {
     return (
     
-        <div className = 'flexGrow0'>
+        <div onClick = {this.props.onClick} className = 'flexGrow0'>
             >
         </div>
 
