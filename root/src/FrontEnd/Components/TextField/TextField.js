@@ -3,17 +3,27 @@ import React,{ Component} from "react";
 
 export default class TextField extends Component{
 
+    constructor (props){
+        super(props);
+        this.recordData = this.recordData.bind(this);
+    }
 
     render(){
-        return(<div>
+        return(<div ref = "textfield">
                 <form >
-                    <input className = "input" type = "text">
+                    <input onChange = {this.recordData} className = "input" type = "text">
+
                     </input>
                 </form>
-               
              </div>
         );
     }
+
+    getData(){
+        return this.state.text;
+    }
+
+    marker = "marker";
 
     state = {
         text : '',
@@ -33,6 +43,12 @@ export default class TextField extends Component{
                 {list.map( x=> x)}
             </ul>
         )
+    }
+
+
+    recordData(event){
+        var text = event.target.value;
+        this.setState({text: text});
     }
 
     updateTable(event){

@@ -5,7 +5,7 @@ import TextField from "../TextField/TextField"
 
 export class TableCell extends Component{
     render(){
-        return (<th className = {this.props.shouldFlexGrow ? "flexGrow1 customTableCell" : "customTableCell"}>{this.props.item}</th>);
+        return (<div className = {this.props.shouldFlexGrow ? "flexGrow1 customTableCell" : "customTableCell"}>{this.props.item}</div>);
     }
 }
 

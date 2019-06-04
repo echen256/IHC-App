@@ -13,8 +13,9 @@ export class Reagent extends Component{
         for (var i = 0; i < this.props.numberOfTextFields;i++){
             cells.push(<TableCell shouldFlexGrow = {true} item = {  <TextField/>}/> );
         }
-        cells.push(<TableCell shouldFlexGrow = {false} item = { <SubmitReagent/>}/> );
+        cells.push(<TableCell shouldFlexGrow = {false} item = { <SubmitReagent />}/> );
         this.setState({cells : cells});
+    
         return cells;
     }
 
@@ -22,18 +23,26 @@ export class Reagent extends Component{
         cells : []
     }
 
+    fetchData(){
+        
+        var cells = this.state.cells;
+        console.log(cells);
+        for (var i = 0; i < cells.length;i++){
+            var cell = cells[i];
+            var item = cell.props.item;
+            console.log(item);
+        }
+    }
+
     componentDidMount(){
         this.renderCells();
     }
 
     render(){
-        return(<tr className = "flexRow">
-           
-               
-                    
-                    {this.state.cells}
-                              
-            </tr>
+        return(<div className = "flexRow">       
+                    {this.state.cells}  
+                    {this.fetchData()}                         
+            </div>
 
         );
     }

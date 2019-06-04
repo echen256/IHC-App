@@ -35,13 +35,13 @@ export class Main extends Component {
 
         
         <div className = "vert-margin-5">
-        <table className = "vert-margin-5 customTable" >
-            <tr>
+        <div className = "vert-margin-5 customTable" >
+            <div>
               <div className = "tableTitle">
                 Experiment Conditions
               </div>
-            </tr>
-            <tr className = 'flexRow'>
+            </div>
+            <div className = 'flexRow'>
               <TableCell shouldFlexGrow = {true} item = { "Tissue Type"}/>
               <TableCell shouldFlexGrow = {true} item = { "Dilution Factor"}/> 
               <TableCell shouldFlexGrow = {true} item = {"Tested Reagent Type"}/> 
@@ -51,9 +51,9 @@ export class Main extends Component {
               <TableCell shouldFlexGrow = {true} item = {"Tested Reagent Catalog Number"}/> 
               <TableCell shouldFlexGrow = {true} item = { "Tested Reagent Notes"}/> 
               <TableCell shouldFlexGrow = {false} item = { "Save"}/> 
-            </tr>
+            </div>
 
-            <tr className = 'flexRow'>
+            <div className = 'flexRow'>
               <TableCell shouldFlexGrow = {true} item = {  <TextField/>}/>
               <TableCell shouldFlexGrow = {true} item = {  <TextField/>}/>
               <TableCell shouldFlexGrow = {true} item = {  <TextField/>}/>
@@ -63,8 +63,8 @@ export class Main extends Component {
               <TableCell shouldFlexGrow = {true} item = {  <TextField/>}/>
               <TableCell shouldFlexGrow = {true} item = {  <TextField/>}/>
               <TableCell shouldFlexGrow = {false} item = { <SubmitReagent/>}/> 
-            </tr>
-        </table>
+            </div>
+        </div>
 
   
         </div>
