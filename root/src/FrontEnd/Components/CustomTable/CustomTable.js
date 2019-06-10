@@ -1,14 +1,5 @@
 import React, { Component } from "react";
 import "./../../../App.css";
-import TextField from "../TextField/TextField"
-
-
-export class TableCell extends Component{
-    render(){
-        return (<div className = {this.props.shouldFlexGrow ? "flexGrow1 customTableCell" : "customTableCell"}>{this.props.item}</div>);
-    }
-}
-
 
 export class CustomTable extends Component {
 

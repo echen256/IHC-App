@@ -2,32 +2,41 @@ import React, { Component } from "react";
 
 
 import "./../../../App.css";
-import TextField  from "./../../Components/TextField/TextField";
+import TableCell  from "./../../Components/TableCell/TableCell";
 import {SubmitReagent} from "../../Components/SubmitReagent/SubmitReagent"
-import { CustomTable , TableCell} from "../../Components/CustomTable/CustomTable";
-import axios from 'axios';
-
 import {Reagent} from "./../../Components/Reagent/Reagent"
-
+import TextField from "./../../Components/TextField/TextField"
+import {SlideInfo} from './../../Components/SlideInfo/SlideInfo'
 
 
 
 export class Main extends Component {
-  state = {
-    items: [
-      "Pretreatment",
-      "Tissue Primer",
-      "Background Blocker",
-      "Antibody",
-      "Linker",
-      "Tracer",
-      "Chromogen",
-      "Counter Stain"
-    ]
-  };
+
+  constructor(props){
+    super(props);
+    this.updateReagents = this.updateReagents.bind(this);
+  }
 
 
+  
+  experiment = {
+    reagents : ['','','','','',''],
+    slide : ''
+  }
+
+  submitExperiment(){
+
+  }
  
+  updateSlideInfo(slide){
+    console.log(slide);
+   // this.experiment.slide = slide;
+  }
+
+  updateReagents(index, reagent){
+    this.experiment.reagents[index] = reagent;
+    console.log(this.reagents);
+  }
 
   render() {
     return (
@@ -41,29 +50,22 @@ export class Main extends Component {
                 Experiment Conditions
               </div>
             </div>
+
             <div className = 'flexRow'>
+            <TableCell shouldFlexGrow = {true} item = { "Tissue ID"}/>
               <TableCell shouldFlexGrow = {true} item = { "Tissue Type"}/>
+             
               <TableCell shouldFlexGrow = {true} item = { "Dilution Factor"}/> 
-              <TableCell shouldFlexGrow = {true} item = {"Tested Reagent Type"}/> 
               <TableCell shouldFlexGrow = {true} item = { "Tested Reagent Name"}/> 
-              <TableCell shouldFlexGrow = {true} item = { "Tested Reagent Lot"}/> 
-              <TableCell shouldFlexGrow = {true} item = {"Tested Reagent Exp Date"}/> 
               <TableCell shouldFlexGrow = {true} item = {"Tested Reagent Catalog Number"}/> 
+              <TableCell shouldFlexGrow = {true} item = { "Tested Reagent Lot"}/> 
+              <TableCell shouldFlexGrow = {true} item = {"Tested Reagent Exp Date"}/>    
               <TableCell shouldFlexGrow = {true} item = { "Tested Reagent Notes"}/> 
               <TableCell shouldFlexGrow = {false} item = { "Save"}/> 
             </div>
 
-            <div className = 'flexRow'>
-              <TableCell shouldFlexGrow = {true} item = {  <TextField/>}/>
-              <TableCell shouldFlexGrow = {true} item = {  <TextField/>}/>
-              <TableCell shouldFlexGrow = {true} item = {  <TextField/>}/>
-              <TableCell shouldFlexGrow = {true} item = {  <TextField/>}/>
-              <TableCell shouldFlexGrow = {true} item = {  <TextField/>}/>
-              <TableCell shouldFlexGrow = {true} item = {  <TextField/>}/>
-              <TableCell shouldFlexGrow = {true} item = {  <TextField/>}/>
-              <TableCell shouldFlexGrow = {true} item = {  <TextField/>}/>
-              <TableCell shouldFlexGrow = {false} item = { <SubmitReagent/>}/> 
-            </div>
+            <SlideInfo dataSlot = {0} export = {this.updateSlideInfo} getRoute = '/get/slide' saveRoute = '/submit/slide'/>
+           
         </div>
 
   
@@ -78,21 +80,21 @@ export class Main extends Component {
             </tr>
             <tr className = 'flexRow'>
                 <TableCell shouldFlexGrow = {true} item = { "Reagent Type"}/> 
-                  <TableCell shouldFlexGrow = {true} item = {  "Reagent Name"}/>
-                    <TableCell shouldFlexGrow = {true} item = {  "Reagent Catalog Number"}/> 
-                      <TableCell shouldFlexGrow = {true} item = { "Reagent Lot"}/> 
-                        <TableCell shouldFlexGrow = {true} item = { "Reagent Exp Date"}/> 
-                          <TableCell shouldFlexGrow = {true} item = { "Reagent Incubation Time"}/>
-                              <TableCell shouldFlexGrow = {true} item = { "Reagent Notes"}/> 
-                              <TableCell shouldFlexGrow = {false} item = { "Save"}/> 
+                <TableCell shouldFlexGrow = {true} item = {  "Reagent Name"}/>
+                <TableCell shouldFlexGrow = {true} item = {  "Reagent Catalog Number"}/> 
+                <TableCell shouldFlexGrow = {true} item = { "Reagent Lot"}/> 
+                <TableCell shouldFlexGrow = {true} item = { "Reagent Exp Date"}/> 
+                <TableCell shouldFlexGrow = {true} item = { "Reagent Incubation Time"}/>
+                <TableCell shouldFlexGrow = {true} item = { "Reagent Notes"}/> 
+                <TableCell shouldFlexGrow = {false} item = { "Save"}/> 
             </tr>
-          <Reagent name = 'Tissue Primer' numberOfTextFields = {6}/>
-          <Reagent name = 'Background Blocker' numberOfTextFields = {6}/>
-          <Reagent name = 'Antibody'  numberOfTextFields = {6}/>
-          <Reagent name = 'Linker'  numberOfTextFields = {6}/>
-          <Reagent name = 'Tracer'  numberOfTextFields = {6}/>
-          <Reagent name = 'Chromogen'  numberOfTextFields = {6}/>
-          <Reagent name = 'Counterstain'  numberOfTextFields = {6}/>
+          <Reagent name = 'Tissue Primer' updateReagents = {this.updateReagents} reagentSlot = {0} />
+          <Reagent name = 'Background Blocker'  updateReagents = {this.updateReagents} reagentSlot = {1} />
+          <Reagent name = 'Antibody'   updateReagents = {this.updateReagents} reagentSlot = {2} />
+          <Reagent name = 'Linker'   updateReagents = {this.updateReagents} reagentSlot = {3}/>
+          <Reagent name = 'Tracer'   updateReagents = {this.updateReagents} reagentSlot = {4} />
+          <Reagent name = 'Chromogen'   updateReagents = {this.updateReagents} reagentSlot = {5}/>
+          <Reagent name = 'Counterstain'   updateReagents = {this.updateReagents} reagentSlot = {6}/>
 
         </table>
 

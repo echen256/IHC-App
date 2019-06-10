@@ -23,26 +23,9 @@ export default class TextField extends Component{
     }
 
     state = {
-        text : '',
-       // autofillOptions : ["12345","7546546","4234"],
-       // showSuggestions : true,
-       // filteredSuggestions : []
+        text : ''
     }
  
-    populateFilteredSuggestionsList(){
-        var list = [];
-        var filteredSuggestions = this.state.autofillOptions;
-        for (var i = 0; i < Math.min(3,filteredSuggestions.length) ;i++){
-            list.push(<li>{filteredSuggestions[i]}</li>)
-        }
-        return (
-            <ul style = {{overflow : 'visible', height : '0px',zIndex : '5',backgroundColor : 'white'}} >
-                {list.map( x=> x)}
-            </ul>
-        )
-    }
-
-
     recordData(event){
         var text = event.target.value;
         this.setState({text: text});

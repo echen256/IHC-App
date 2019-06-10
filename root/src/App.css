@@ -19,6 +19,17 @@
   color: white;
 }
 
+.submitReagent{
+  vertical-align: baseline;
+  color:red;
+  font-weight: 1000;
+  font-size: 20px;
+}
+
+.submitReagent:hover{
+    color: green;
+}
+
 .App-link {
   color: #61dafb;
 }
