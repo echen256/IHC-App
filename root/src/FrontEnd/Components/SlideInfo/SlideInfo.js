@@ -23,6 +23,13 @@ export class SlideInfo extends CustomForm {
             expDate : textArray[6],
             notes : textArray[7]
         }*/
+        var reagent = {
+            name : textArray[3],
+            catalog : textArray[4],
+            lot : textArray[5],
+            expirationDate : textArray[6]
+        };
+        var reagentID = 
         this.data = { 
             tissueId : textArray[0],
             tissueType : textArray[1],
@@ -30,7 +37,7 @@ export class SlideInfo extends CustomForm {
                 name : textArray[3],
                 catalog : textArray[4],
                 lot : textArray[5],
-                expDate : textArray[6]
+                expirationDate : textArray[6]
             }
          
         }

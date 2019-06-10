@@ -44,6 +44,7 @@ export class CustomForm extends Component {
         }
         if (formComplete){
             this.constructObjectFromData(textArray);
+            this.props.export(this.props.dataSlot,this.data);
         }
         
         return formComplete;
@@ -67,7 +68,6 @@ export class CustomForm extends Component {
     get(){
         var packageSuccessful = this.packageData();
         if (packageSuccessful){
-         
             Axios.post(this.saveRoute,this.data).then(function(res){
                 console.log(res);
             });

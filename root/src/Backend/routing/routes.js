@@ -4,17 +4,11 @@ const db = require('./../models');
 module.exports = function (app) {
 
     app.post("/submit/slide", function (req, res) {
-        console.log(req.body);
-        var reagent = req.body.reagent;
-
-
-
-
-
-        
         db.Slide.create(req.body).then(res => { console.log("Slide created " + res) }).catch(error => {console.log(error)});
         res.json({ message: "post complete" });
     });
+
+    
 
     app.post("/get/reagent", function(req,res){
         var reagent = req.body;
@@ -33,12 +27,13 @@ module.exports = function (app) {
         db.Reagent.findAll({where : {           
             catalog :reagent.catalog,
             lot : reagent.lot
-        }}).then(res => {
-           if (res.length === 0){
-                db.Reagent.create(req.body).then(res => { console.log("Reagent created " + res) }).catch(error => {console.log(error)});
+        }}).then(res2 => {
+           if (res2.length === 0){
+                db.Reagent.create(req.body).then(res3 => { console.log("Reagent created " + res3) }).catch(error => {console.log(error)});
            } else {
             console.log("reagent already exists");
            }
+           
         }).catch(error => {console.log(error)});
        
         res.json({ message: "post complete" });
