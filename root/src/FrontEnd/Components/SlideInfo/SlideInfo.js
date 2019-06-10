@@ -13,34 +13,29 @@ export class SlideInfo extends CustomForm {
 
     constructObjectFromData(){
         var textArray = this.state.textArray;
-        /*this.data = {
-            tissueType : textArray[0],
-            tissueId : textArray[1],
-            dilutionFactor : textArray[2],
-            testedReagenName : textArray[3],
-            catalogNumber : textArray[4],
-            lot : textArray[5],
-            expDate : textArray[6],
-            notes : textArray[7]
-        }*/
+        
         var reagent = {
             name : textArray[3],
             catalog : textArray[4],
             lot : textArray[5],
             expirationDate : textArray[6]
         };
-        var reagentID = 
-        this.data = { 
-            tissueId : textArray[0],
-            tissueType : textArray[1],
-            reagent : {
-                name : textArray[3],
-                catalog : textArray[4],
-                lot : textArray[5],
-                expirationDate : textArray[6]
+
+        var self = this;
+        Axios.post("/submit/reagent",reagent).then (function(res){
+        
+            var reagentId = res.data[0].id;
+       
+            self.data = { 
+                tissueId : textArray[0],
+                tissueType : textArray[1],
+                reagent : reagentId
+             
             }
-         
-        }
+            Axios.post(self.props.saveRoute,self.data);
+            self.export(self.data);
+        });
+
        
     }
 

@@ -18,6 +18,7 @@ export class Reagent extends CustomForm {
             lot : textArray[2],
             expirationDate : textArray[3]
         }
+        
        
     }
 

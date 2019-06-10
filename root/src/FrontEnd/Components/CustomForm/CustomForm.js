@@ -53,9 +53,7 @@ export class CustomForm extends Component {
     save() {
         var packageSuccessful = this.packageData();
         if (packageSuccessful){
-            console.log(this.data);
             Axios.post(this.saveRoute,this.data
-           
             ).then(function(res){
                 console.log(res);
             })
@@ -68,7 +66,7 @@ export class CustomForm extends Component {
     get(){
         var packageSuccessful = this.packageData();
         if (packageSuccessful){
-            Axios.post(this.saveRoute,this.data).then(function(res){
+            Axios.post(this.getRoute,this.data).then(function(res){
                 console.log(res);
             });
             } else {

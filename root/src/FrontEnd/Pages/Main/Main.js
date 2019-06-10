@@ -7,6 +7,7 @@ import {SubmitReagent} from "../../Components/SubmitReagent/SubmitReagent"
 import {Reagent} from "./../../Components/Reagent/Reagent"
 import TextField from "./../../Components/TextField/TextField"
 import {SlideInfo} from './../../Components/SlideInfo/SlideInfo'
+import Axios from "axios";
 
 
 
@@ -20,17 +21,20 @@ export class Main extends Component {
 
   
   experiment = {
+    reagentForeignKeys : ['','','','','',''],
     reagents : ['','','','','',''],
     slide : ''
   }
 
   submitExperiment(){
-
+      for (var i = 0; i < this.reagent.length;i++){
+        Axios.post("/submit/")
+      }
   }
  
-  updateSlideInfo(dataSlot,slide){
-    console.log(slide);
-   // this.experiment.slide = slide;
+  updateSlideInfo(slide){
+  
+    this.experiment.slide = slide;
   }
 
   updateReagents(dataSlot, reagent){

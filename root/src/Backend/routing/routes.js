@@ -17,26 +17,26 @@ module.exports = function (app) {
             catalog :reagent.catalog,
             lot : reagent.lot
            
-        }}).then(res => {
-            console.log(res);
+        }}).then(response=> {
+            res.json(response);
         }).catch(error => {console.log(error)});
     })
 
     app.post("/submit/reagent", function (req, res) {
         var reagent = req.body;
+
         db.Reagent.findAll({where : {           
             catalog :reagent.catalog,
             lot : reagent.lot
-        }}).then(res2 => {
-           if (res2.length === 0){
-                db.Reagent.create(req.body).then(res3 => { console.log("Reagent created " + res3) }).catch(error => {console.log(error)});
+        }}).then(sqlResponse => {
+           if (sqlResponse.length === 0){
+                db.Reagent.create(req.body).then(res => { console.log("Reagent created " + res) }).catch(error => {console.log(error)});
            } else {
-            console.log("reagent already exists");
+                console.log("reagent already exists");
            }
-           
+           res.send(sqlResponse);
         }).catch(error => {console.log(error)});
-       
-        res.json({ message: "post complete" });
+        
     });
 
     app.get("/routing",function(req,res){
