@@ -32,8 +32,8 @@ export class SlideInfo extends CustomForm {
                 reagent : reagentId
              
             }
-            Axios.post(self.props.saveRoute,self.data);
-            self.export(self.data);
+            //Axios.post(self.props.saveRoute,self.data);
+            //self.export(self.data);
         });
 
        

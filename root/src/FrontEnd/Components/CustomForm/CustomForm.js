@@ -20,6 +20,7 @@ export class CustomForm extends Component {
     record(i, text) {
         var localTextArray = this.state.textArray;
         localTextArray[i] = text;
+        this.packageData();
     }
 
     state = {

@@ -16,6 +16,7 @@ export class Main extends Component {
   constructor(props){
     super(props);
     this.updateReagents = this.updateReagents.bind(this);
+    this.submitExperiment = this.submitExperiment.bind(this);
   }
 
 
@@ -27,9 +28,36 @@ export class Main extends Component {
   }
 
   submitExperiment(){
-      for (var i = 0; i < this.reagent.length;i++){
-        Axios.post("/submit/")
+
+      var data = this.experiment.reagents;
+      
+      var promises = [];
+      var complete = true;
+
+      data.push(this.experiment.slide);
+
+      for (var i = 0; i < data.length;i++){
+
+        if (data[i] !== ''){
+          if (i === data.length -1){
+            promises.push(Axios.post("/submit/slide", data[i] ));
+          } else {
+            promises.push(Axios.post("/submit/reagent", data[i] ));
+          }
+          
+        } else {
+           complete = false;
+        }
+        
       }
+      if (complete){
+        Promise.all(promises).then(function(res){
+          console.log(res);
+        })
+      } else {
+        console.log('incomplete form');
+      }
+      
   }
  
   updateSlideInfo(slide){
@@ -49,6 +77,8 @@ export class Main extends Component {
         
         <div className = "vert-margin-5">
         <div className = "vert-margin-5 customTable" >
+
+            <div onClick = {this.submitExperiment}>  X </div>
             <div>
               <div className = "tableTitle">
                 Experiment Conditions
