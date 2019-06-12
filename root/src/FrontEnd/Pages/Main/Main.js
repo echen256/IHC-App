@@ -15,21 +15,21 @@ export class Main extends Component {
 
   constructor(props){
     super(props);
+    this.updateSlideInfo = this.updateSlideInfo.bind(this);
     this.updateReagents = this.updateReagents.bind(this);
     this.submitExperiment = this.submitExperiment.bind(this);
   }
 
 
-  
+
   experiment = {
-    reagentForeignKeys : ['','','','','',''],
     reagents : ['','','','','',''],
     slide : ''
   }
 
   submitExperiment(){
 
-      var data = this.experiment.reagents;
+      var data = [...this.experiment.reagents];
       
       var promises = [];
       var complete = true;
@@ -53,21 +53,22 @@ export class Main extends Component {
       if (complete){
         Promise.all(promises).then(function(res){
           console.log(res);
-        })
+          var testedReagent = res[res.length -1];
+          
+        });
       } else {
         console.log('incomplete form');
       }
       
   }
  
-  updateSlideInfo(slide){
-  
+  updateSlideInfo(dataSlot,slide){
+   
     this.experiment.slide = slide;
   }
 
   updateReagents(dataSlot, reagent){
     this.experiment.reagents[dataSlot] = reagent;
-    console.log(this.reagents);
   }
 
   render() {

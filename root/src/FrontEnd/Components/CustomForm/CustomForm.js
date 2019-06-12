@@ -10,8 +10,8 @@ export class CustomForm extends Component {
     constructor(props) {
         super(props);
         this.record= this.record.bind(this);
-        this.save = this.save.bind(this);
-        this.get = this.get.bind(this);
+        //this.save = this.save.bind(this);
+        //this.get = this.get.bind(this);
         this.packageData = this.packageData.bind(this);
         this.getRoute = props.getRoute;
         this.saveRoute = props.saveRoute;
@@ -51,7 +51,7 @@ export class CustomForm extends Component {
         return formComplete;
     }
 
-    save() {
+   /* save() {
         var packageSuccessful = this.packageData();
         if (packageSuccessful){
             Axios.post(this.saveRoute,this.data
@@ -73,7 +73,7 @@ export class CustomForm extends Component {
             } else {
             console.log("invalid data, missing info")
         }
-    }
+    }*/
 
     render() {
         return (
