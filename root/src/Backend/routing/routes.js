@@ -4,12 +4,11 @@ const db = require('./../models');
 module.exports = function (app) {
 
     app.post("/submit/slide", function (req, res) {
-        db.Slide.findAll({where : {
-
-            
-        }})
-        db.Slide.create(req.body).then(res => { console.log("Slide created " + res) }).catch(error => {console.log(error)});
-        res.json({ message: "post complete" });
+        /*db.Slide.findAll({where : {
+        
+        }})*/
+        db.Slide.create(req.body).then(response => {res.json(response)}).catch(error => {console.log(error)});
+        
     });
 
     
