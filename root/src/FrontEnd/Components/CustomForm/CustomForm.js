@@ -51,7 +51,7 @@ export class CustomForm extends Component {
         return formComplete;
     }
 
-   /* save() {
+    save() {
         var packageSuccessful = this.packageData();
         if (packageSuccessful){
             Axios.post(this.saveRoute,this.data
@@ -73,7 +73,7 @@ export class CustomForm extends Component {
             } else {
             console.log("invalid data, missing info")
         }
-    }*/
+    }
 
     render() {
         return (

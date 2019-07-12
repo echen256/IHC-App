@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import './App.css';
 import { Main } from "./FrontEnd/Pages/Main/Main"
+import {AddSlide} from './FrontEnd/Pages/AddSlide/AddSlide'
 import {Router, Switch, Route} from "react-router";
 import { Navbar } from "./FrontEnd/Components/Navbar/Navbar"
 

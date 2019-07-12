@@ -32,7 +32,7 @@ export class Reagent extends CustomForm {
                 <TableCell shouldFlexGrow={true} item={<TextField i={3} updateTextArray={this.record} />}/>
                 <TableCell shouldFlexGrow={true} item={<TextField i={4} updateTextArray={this.record} />}/>
                 <TableCell shouldFlexGrow={true} item={<TextField i={5} updateTextArray={this.record} />}/>
-                <TableCell shouldFlexGrow={false} item={<SubmitReagent/>} />
+                <TableCell shouldFlexGrow={false} item={<SubmitReagent />} />
                 
              
             </div>

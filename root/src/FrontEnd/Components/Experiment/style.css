@@ -1,0 +1,55 @@
+.experimentContainer{
+    border-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    color: #333333;
+    padding: 10px;
+    font-size: 20px;
+    overflow: auto;
+    display: flex;
+    font-family: 'Montserrat', sans-serif;
+}   
+
+.title{
+    font-size: 30px;
+    border-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: grey;
+    font-family: 'DM Serif Display', serif;
+}
+
+.data{
+    padding: 3px;
+    margin: 5px;
+    flex-grow: 1;
+    position: relative;
+
+}
+
+.header{
+    border-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: grey;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+   
+}
+
+
+.content{
+    flex-grow: 1;
+    font-size: 16px;
+}
+
+.desc{
+    overflow:hidden;
+    display: flex;
+    flex-direction: column;
+ 
+}
+
+.experiment{
+    margin: 5%;
+    overflow: auto;
+}

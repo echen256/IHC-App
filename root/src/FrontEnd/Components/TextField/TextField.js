@@ -12,18 +12,24 @@ export default class TextField extends Component{
     render(){
         
         return(
-                <input onChange = {this.recordData} className = "input" type = "text">
+                <input onChange = {this.recordData} className = "input" type = "text" >
                 </input>
           
         );
     }
+
+   
 
     getData(){
         return this.state.text;
     }
 
     state = {
-        text : ''
+        text : '1'
+    }
+
+    componentDidMount(){
+        this.props.updateTextArray(this.props.i,this.state.text)
     }
  
     recordData(event){
@@ -35,7 +41,6 @@ export default class TextField extends Component{
     updateTable(event){
 
         var text = event.target.value;
-       // this.state.filteredAutoFillOptions = this.state.autofillOptions.filter(x=> x.includes(text));
         console.log(this.state.filteredAutoFillOptions);
         this.setState({text: text});
 
