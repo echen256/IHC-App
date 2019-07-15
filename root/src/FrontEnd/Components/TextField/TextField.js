@@ -5,45 +5,38 @@ export default class TextField extends Component{
 
     constructor (props){
         super(props);
-        this.recordData = this.recordData.bind(this);
+        this.record = this.record.bind(this);
+        this.export = this.export.bind(this);
+        this.import = this.import.bind(this);
     }
 
     
     render(){
         
         return(
-                <input onChange = {this.recordData} className = "input" type = "text" >
+                <input ref ='input' onChange = {this.record} className = "input" type = "text" >
                 </input>
           
         );
     }
 
-   
+    
 
-    getData(){
-        return this.state.text;
+    export(){
+        return this.refs.input.value;
     }
 
+    import(text){
+        this.refs.input.value = text;
+    }
+
+    record (event){
+        var text = event.target.value;
+        this.setState({text: text});
+    }
     state = {
-        text : '1'
-    }
-
-    componentDidMount(){
-        this.props.updateTextArray(this.props.i,this.state.text)
+        text : ''
     }
  
-    recordData(event){
-        var text = event.target.value;
-        this.setState({text: text});
-        this.props.updateTextArray(this.props.i,text)
-    }
-
-    updateTable(event){
-
-        var text = event.target.value;
-        console.log(this.state.filteredAutoFillOptions);
-        this.setState({text: text});
-
-    }
 
 }

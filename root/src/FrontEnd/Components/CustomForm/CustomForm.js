@@ -10,11 +10,7 @@ export class CustomForm extends Component {
     constructor(props) {
         super(props);
         this.record= this.record.bind(this);
-        //this.save = this.save.bind(this);
-        //this.get = this.get.bind(this);
         this.packageData = this.packageData.bind(this);
-        this.getRoute = props.getRoute;
-        this.saveRoute = props.saveRoute;
     }
 
     record(i, text) {
@@ -23,38 +19,77 @@ export class CustomForm extends Component {
         this.packageData();
     }
 
-    state = {
-        textArray: ['','','','','',''],
+    import(data){
+        var refs = this.state.refs;
+        for (var i = 0; i < refs.length;i++){
+            refs[i].current.import(1)
+        }
     }
 
-    data = {}
-    getRoute = '';
-    saveRoute = '';
+    state = {
+        refs : [],
+        textFields : [],
+        
 
+    }
+
+    numberOfTextFields = 0;
+    
     constructObjectFromData(){
 
     }
 
     packageData(){
-        var textArray = this.state.textArray;
+        
+        var refs = this.state.refs;
         var formComplete = true;
-        for (var i = 0; i < textArray.length;i++){
-            if (textArray[i] === ""){
+        for (var i = 0; i < refs.length;i++){
+            var text = refs[i].current.export();
+            if (text === ""){
                 formComplete = false;
             } 
         }
         if (formComplete){
-            this.constructObjectFromData(textArray);
+            this.constructObjectFromData();
             this.props.export(this.props.dataSlot,this.data);
         }
         
         return formComplete;
     }
 
+    
+    componentDidMount(){
+        var response = this.generateTextFields(this.numberOfTextFields);
+        this.setState({refs: response.refs, textFields : response.textFields});
+        console.log(this.state);
+    }
+
+    generateTextFields(numberOfTextFields ){
+        var textFields = [];
+        var refs = [];
+        for (var j = 0; j < numberOfTextFields;j++){
+            var ref = React.createRef();
+            refs.push(ref);
+            textFields.push(<TableCell shouldFlexGrow={true} item={<TextField i={j} parent = {this} ref = {ref}/>}/>)
+        }
+        return {textFields: textFields, refs : refs}
+    }
+
+    get(){
+        var packageSuccessful = this.packageData();
+        if (packageSuccessful){
+            Axios.post(this.props.getRoute,this.data).then(function(res){
+                console.log(res);
+            });
+            } else {
+            console.log("invalid data, missing info")
+        }
+    }
+
     save() {
         var packageSuccessful = this.packageData();
         if (packageSuccessful){
-            Axios.post(this.saveRoute,this.data
+            Axios.post(this.props.saveRoute,this.data
             ).then(function(res){
                 console.log(res);
             })
@@ -62,17 +97,6 @@ export class CustomForm extends Component {
             console.log("invalid data, missing info")
         }
        
-    }
-
-    get(){
-        var packageSuccessful = this.packageData();
-        if (packageSuccessful){
-            Axios.post(this.getRoute,this.data).then(function(res){
-                console.log(res);
-            });
-            } else {
-            console.log("invalid data, missing info")
-        }
     }
 
     render() {

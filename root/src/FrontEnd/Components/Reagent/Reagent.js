@@ -10,32 +10,31 @@ import {CustomForm} from "./../../Components/CustomForm/CustomForm"
 export class Reagent extends CustomForm {
 
     constructObjectFromData(){
-        var textArray = this.state.textArray;
-        
+
+        var refs = this.state.refs;
         this.data = { 
-            name : textArray[0],
-            catalog : textArray[1],
-            lot : textArray[2],
-            expirationDate : textArray[3]
+            name : refs[0].current.export(),
+            catalog : refs[1].current.export(),
+            lot : refs[2].current.export(),
+            expirationDate : refs[3].current.export()
         }
         
        
     }
 
+    numberOfTextFields = 6;
+
     render() {
+
+        var element = <div className="flexRow">
+            <TableCell shouldFlexGrow={true} item={this.props.name} />
+             {this.state.textFields}
+            <TableCell shouldFlexGrow={false} item={<SubmitReagent onClick = {this.packageData} />} />
+        </div>
+        
+
         return (
-            <div className="flexRow">
-                <TableCell shouldFlexGrow={true} item={this.props.name} />
-                <TableCell shouldFlexGrow={true} item={<TextField i={0} updateTextArray={this.record} />}/>
-                <TableCell shouldFlexGrow={true} item={<TextField i={1} updateTextArray={this.record} />}/>
-                <TableCell shouldFlexGrow={true} item={<TextField i={2} updateTextArray={this.record} />}/>
-                <TableCell shouldFlexGrow={true} item={<TextField i={3} updateTextArray={this.record} />}/>
-                <TableCell shouldFlexGrow={true} item={<TextField i={4} updateTextArray={this.record} />}/>
-                <TableCell shouldFlexGrow={true} item={<TextField i={5} updateTextArray={this.record} />}/>
-                <TableCell shouldFlexGrow={false} item={<SubmitReagent />} />
-                
-             
-            </div>
+            element
         );
     }
 

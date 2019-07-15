@@ -9,7 +9,21 @@ import TextField from "./../../Components/TextField/TextField"
 import {SlideInfo} from './../../Components/SlideInfo/SlideInfo'
 import Axios from "axios";
 
+class ReagentData {
 
+  data = {
+    
+  }
+
+  constructor(type,name,catalog,lot, expDate,notes){
+      this.data.type = type;
+      this.data.name = name;
+      this.data.catalog = catalog;
+      this.data.lot = lot;
+      this.data.expDate = expDate;
+      this.data.notes = notes;
+  }
+}
 
 export class AddSlide extends Component {
 
@@ -25,6 +39,21 @@ export class AddSlide extends Component {
   experiment = {
     reagents : ['','','','','','','',''],
     slide : ''
+  }
+
+  state = {
+    /*slide : {},
+    reagents : [
+      new ReagentData('Pretreatment','','','','',''),
+      new ReagentData('Background Blocker','','','','',''),
+      new ReagentData('Primary Antibody','','','','',''),
+      new ReagentData('Linker','','','','',''),
+      new ReagentData('Tracer','','','','',''),
+      new ReagentData('Chromogen','','','','',''),
+      new ReagentData('Counter Stain','','','','',''),
+      new ReagentData('Pretreatment','','','','',''),
+      new ReagentData('Pretreatment','','','','','')
+    ]*/
   }
 
   submitExperiment(){
@@ -82,6 +111,11 @@ export class AddSlide extends Component {
 
   
 
+  loadExperiment(experiment){
+     
+  }
+  
+
   render() {
     return (
       <div className = "App">
@@ -109,7 +143,7 @@ export class AddSlide extends Component {
               <TableCell shouldFlexGrow = {false} item = { "Save"}/> 
             </div>
 
-            <SlideInfo dataSlot = {0} export = {this.updateSlideInfo} getRoute = '/get/slide' saveRoute = '/submit/slide'/>
+            <SlideInfo ref = 'slide' dataSlot = {0} export = {this.updateSlideInfo} getRoute = '/get/slide' saveRoute = '/submit/slide'/>
            
         </div>
 
@@ -133,14 +167,14 @@ export class AddSlide extends Component {
                 <TableCell shouldFlexGrow = {true} item = { "Reagent Notes"}/> 
                 <TableCell shouldFlexGrow = {false} item = { "Save"}/> 
             </tr>
-          <Reagent name = 'PreTreatment' export = {this.updateReagents} dataSlot = {0} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
-          <Reagent name = 'Tissue Primer' export = {this.updateReagents} dataSlot = {1} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
-          <Reagent name = 'Background Blocker'  export = {this.updateReagents} dataSlot = {2} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
-          <Reagent name = 'Antibody'   export = {this.updateReagents} dataSlot = {3} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
-          <Reagent name = 'Linker'  export = {this.updateReagents} dataSlot = {4} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
-          <Reagent name = 'Tracer'   export = {this.updateReagents} dataSlot = {5} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
-          <Reagent name = 'Chromogen'   export = {this.updateReagents} dataSlot = {6} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
-          <Reagent name = 'Counterstain'   export = {this.updateReagents} dataSlot = {7} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
+          <Reagent ref = 'PreTreatment' name = 'PreTreatment' export = {this.updateReagents} dataSlot = {0} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
+          <Reagent ref = 'Tissue Primer' name = 'Tissue Primer' export = {this.updateReagents} dataSlot = {1} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
+          <Reagent ref =' Background Blocker' name = 'Background Blocker'  export = {this.updateReagents} dataSlot = {2} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
+          <Reagent ref = 'Antiobody' name = 'Antibody'   export = {this.updateReagents} dataSlot = {3} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
+          <Reagent ref = 'Linker' name = 'Linker'  export = {this.updateReagents} dataSlot = {4} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
+          <Reagent ref = 'Tracer' name = 'Tracer'   export = {this.updateReagents} dataSlot = {5} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
+          <Reagent ref = 'Chromogen' name = 'Chromogen'   export = {this.updateReagents} dataSlot = {6} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
+          <Reagent ref = 'Counterstain' name = 'Counterstain'   export = {this.updateReagents} dataSlot = {7} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
         </table>
 
       </div>

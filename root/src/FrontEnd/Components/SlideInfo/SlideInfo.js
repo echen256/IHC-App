@@ -8,39 +8,31 @@ import { CustomForm } from "./../../Components/CustomForm/CustomForm"
 
 export class SlideInfo extends CustomForm {
 
-
+    
 
 
     constructObjectFromData() {
-        var textArray = this.state.textArray;
+        var refs = this.state.refs;
 
 
         this.data = {
-            tissueId: textArray[0],
-            tissueType: textArray[1],
-            dilutionFactor: textArray[2],
-            name: textArray[3],
-            catalog: textArray[4],
-            lot: textArray[5],
-            expirationDate: textArray[6]
+            tissueId: refs.current[0].export(),
+            tissueType: refs.current[1].export(),
+            dilutionFactor: refs.current[2].export(),
+            name: refs.current[3].export(),
+            catalog: refs.current[4].export(),
+            lot: refs.current[5].export(),
+            expirationDate: refs.current[6].export()
 
         }
-
-
-
     }
+    
+    numberOfTextFields = 8;
 
     render() {
         return (
             <div className="flexRow">
-                <TableCell shouldFlexGrow={true} item={<TextField i={0} updateTextArray={this.record} />} />
-                <TableCell shouldFlexGrow={true} item={<TextField i={1} updateTextArray={this.record} />} />
-                <TableCell shouldFlexGrow={true} item={<TextField i={2} updateTextArray={this.record} />} />
-                <TableCell shouldFlexGrow={true} item={<TextField i={3} updateTextArray={this.record} />} />
-                <TableCell shouldFlexGrow={true} item={<TextField i={4} updateTextArray={this.record} />} />
-                <TableCell shouldFlexGrow={true} item={<TextField i={5} updateTextArray={this.record} />} />
-                <TableCell shouldFlexGrow={true} item={<TextField i={6} updateTextArray={this.record} />} />
-                <TableCell shouldFlexGrow={true} item={<TextField i={6} updateTextArray={this.record} />} />
+                {this.state.textFields}
                 <TableCell shouldFlexGrow={false} item={<SubmitReagent  />} />
             </div>
         );
