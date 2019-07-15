@@ -36,45 +36,53 @@ export class AddSlide extends Component {
 
 
 
-  experiment = {
-    reagents : ['','','','','','','',''],
-    slide : ''
-  }
+  
 
   state = {
-    /*slide : {},
-    reagents : [
-      new ReagentData('Pretreatment','','','','',''),
-      new ReagentData('Background Blocker','','','','',''),
-      new ReagentData('Primary Antibody','','','','',''),
-      new ReagentData('Linker','','','','',''),
-      new ReagentData('Tracer','','','','',''),
-      new ReagentData('Chromogen','','','','',''),
-      new ReagentData('Counter Stain','','','','',''),
-      new ReagentData('Pretreatment','','','','',''),
-      new ReagentData('Pretreatment','','','','','')
-    ]*/
+    slideRef : {},
+    reagentRefs : []
+  }
+
+  componentDidMount(){
+    
+    var slideRef = React.createRef();
+    var reagentRefs = [];
+    for (var i = 0; i < 8;i++ ){
+      reagentRefs.push(React.createRef());
+    }
+    this.setState({
+      slideRef : slideRef, reagentRefs : reagentRefs
+    })
+
   }
 
   submitExperiment(){
 
-      var data = [...this.experiment.reagents];
-      
+      var reagentRefs = this.state.reagentRefs;
       var promises = [];
       var complete = true;
 
  
-      for (var i = 0; i < data.length;i++){
-
-        if (data[i] !== ''){
-          promises.push(Axios.post("/submit/reagent", data[i] ));   
+      for (var i = 0; i < reagentRefs.length;i++){
+        var data = reagentRefs[i].current.export();
+        console.log(data);
+        if (data !== ''){
+          promises.push(Axios.post("/submit/reagent", data ));   
         } else {
-           console.log(i);
+           
            complete = false;
         }
         
       }
-      promises.push(Axios.post("/submit/slide",this.experiment.slide  ));
+
+      var slideRef = this.state.slideRef;
+      if (slideRef !== '') {
+        promises.push(Axios.post("/submit/slide", slideRef.current.export() ));
+      } else {
+        complete = false;
+      }
+   
+     
 
       if (complete){
         Promise.all(promises).then(function(res){
@@ -82,14 +90,14 @@ export class AddSlide extends Component {
           var slide = res[res.length -1];
           var experiment = {
             slide : slide.data.id,
-            pretreatment : res[0].data[0].id,
-            tissuePrimer : res[1].data[0].id,
-            backgroundBlocker : res[2].data[0].id,
-            antibody : res[3].data[0].id,
-            linker : res[4].data[0].id,
-            tracer : res[5].data[0].id,
-            chromogen : res[6].data[0].id,
-            counterStain : res[7].data[0].id
+            pretreatment : res[0].data.id,
+            tissuePrimer : res[1].data.id,
+            backgroundBlocker : res[2].data.id,
+            antibody : res[3].data.id,
+            linker : res[4].data.id,
+            tracer : res[5].data.id,
+            chromogen : res[6].data.id,
+            counterStain : res[7].data.id
           }
           Axios.post('/submit/experiment', experiment).then(function(res){
             console.log(res);
@@ -109,7 +117,6 @@ export class AddSlide extends Component {
     this.experiment.reagents[dataSlot] = reagent;
   }
 
-  
 
   loadExperiment(experiment){
      
@@ -143,7 +150,7 @@ export class AddSlide extends Component {
               <TableCell shouldFlexGrow = {false} item = { "Save"}/> 
             </div>
 
-            <SlideInfo ref = 'slide' dataSlot = {0} export = {this.updateSlideInfo} getRoute = '/get/slide' saveRoute = '/submit/slide'/>
+            <SlideInfo ref = {this.state.slideRef} getRoute = '/get/slide' saveRoute = '/submit/slide'/>
            
         </div>
 
@@ -167,24 +174,17 @@ export class AddSlide extends Component {
                 <TableCell shouldFlexGrow = {true} item = { "Reagent Notes"}/> 
                 <TableCell shouldFlexGrow = {false} item = { "Save"}/> 
             </tr>
-          <Reagent ref = 'PreTreatment' name = 'PreTreatment' export = {this.updateReagents} dataSlot = {0} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
-          <Reagent ref = 'Tissue Primer' name = 'Tissue Primer' export = {this.updateReagents} dataSlot = {1} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
-          <Reagent ref =' Background Blocker' name = 'Background Blocker'  export = {this.updateReagents} dataSlot = {2} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
-          <Reagent ref = 'Antiobody' name = 'Antibody'   export = {this.updateReagents} dataSlot = {3} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
-          <Reagent ref = 'Linker' name = 'Linker'  export = {this.updateReagents} dataSlot = {4} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
-          <Reagent ref = 'Tracer' name = 'Tracer'   export = {this.updateReagents} dataSlot = {5} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
-          <Reagent ref = 'Chromogen' name = 'Chromogen'   export = {this.updateReagents} dataSlot = {6} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
-          <Reagent ref = 'Counterstain' name = 'Counterstain'   export = {this.updateReagents} dataSlot = {7} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
+          <Reagent ref = {this.state.reagentRefs[0]} parent = {this} name = 'PreTreatment'  getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
+          <Reagent ref = {this.state.reagentRefs[1]} parent = {this} name = 'Tissue Primer'  getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
+          <Reagent ref = {this.state.reagentRefs[2]} parent = {this} name = 'Background Blocker' getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
+          <Reagent ref = {this.state.reagentRefs[3]} parent = {this} name = 'Antibody'   getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
+          <Reagent ref = {this.state.reagentRefs[4]} parent = {this} name = 'Linker' getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
+          <Reagent ref = {this.state.reagentRefs[5]} parent = {this} name = 'Tracer'   getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
+          <Reagent ref = {this.state.reagentRefs[6]} parent = {this} name = 'Chromogen'  getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
+          <Reagent ref = {this.state.reagentRefs[7]} parent = {this} name = 'Counterstain'   getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
         </table>
 
       </div>
     );
   }
 }
-/* <Reagent name = 'Background Blocker'  export = {this.updateReagents} dataSlot = {1} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
-          <Reagent name = 'Antibody'   export = {this.updateReagents} dataSlot = {2} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
-          <Reagent name = 'Linker'  export = {this.updateReagents} dataSlot = {3} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
-          <Reagent name = 'Tracer'   export = {this.updateReagents} dataSlot = {4} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
-          <Reagent name = 'Chromogen'   export = {this.updateReagents} dataSlot = {5} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
-          <Reagent name = 'Counterstain'   export = {this.updateReagents} dataSlot = {6} getRoute = '/get/reagent' saveRoute = '/submit/reagent'/>
-*/

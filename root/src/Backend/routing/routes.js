@@ -37,7 +37,7 @@ module.exports = function (app) {
                 outbound.send(res);
                 }).catch(error => {console.log(error)});
            } else {
-                outbound.send(sqlResponse);
+                outbound.send(sqlResponse[0]);
            }
            
         }).catch(error => {console.log(error)});

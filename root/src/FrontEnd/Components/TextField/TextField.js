@@ -20,8 +20,6 @@ export default class TextField extends Component{
         );
     }
 
-    
-
     export(){
         return this.refs.input.value;
     }

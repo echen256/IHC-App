@@ -9,38 +9,26 @@ export class CustomForm extends Component {
 
     constructor(props) {
         super(props);
-        this.record= this.record.bind(this);
-        this.packageData = this.packageData.bind(this);
-    }
-
-    record(i, text) {
-        var localTextArray = this.state.textArray;
-        localTextArray[i] = text;
-        this.packageData();
+        this.export = this.export.bind(this);
+        this.import =this.import.bind(this);
     }
 
     import(data){
+        var values = Object.values(data);
         var refs = this.state.refs;
         for (var i = 0; i < refs.length;i++){
-            refs[i].current.import(1)
+            refs[i].current.import(values[i])
         }
     }
 
     state = {
         refs : [],
         textFields : [],
-        
-
     }
 
     numberOfTextFields = 0;
-    
-    constructObjectFromData(){
 
-    }
-
-    packageData(){
-        
+    export(){
         var refs = this.state.refs;
         var formComplete = true;
         for (var i = 0; i < refs.length;i++){
@@ -49,19 +37,19 @@ export class CustomForm extends Component {
                 formComplete = false;
             } 
         }
+
         if (formComplete){
-            this.constructObjectFromData();
-            this.props.export(this.props.dataSlot,this.data);
+           return this.constructObjectFromData();
+            
         }
         
-        return formComplete;
+        return '';
     }
 
     
     componentDidMount(){
         var response = this.generateTextFields(this.numberOfTextFields);
         this.setState({refs: response.refs, textFields : response.textFields});
-        console.log(this.state);
     }
 
     generateTextFields(numberOfTextFields ){
@@ -70,7 +58,7 @@ export class CustomForm extends Component {
         for (var j = 0; j < numberOfTextFields;j++){
             var ref = React.createRef();
             refs.push(ref);
-            textFields.push(<TableCell shouldFlexGrow={true} item={<TextField i={j} parent = {this} ref = {ref}/>}/>)
+            textFields.push(<TableCell shouldFlexGrow={true} item={<TextField parent = {this} ref = {ref}/>}/>)
         }
         return {textFields: textFields, refs : refs}
     }

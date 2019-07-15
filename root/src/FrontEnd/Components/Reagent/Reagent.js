@@ -10,16 +10,13 @@ import {CustomForm} from "./../../Components/CustomForm/CustomForm"
 export class Reagent extends CustomForm {
 
     constructObjectFromData(){
-
         var refs = this.state.refs;
-        this.data = { 
+        return { 
             name : refs[0].current.export(),
             catalog : refs[1].current.export(),
             lot : refs[2].current.export(),
             expirationDate : refs[3].current.export()
         }
-        
-       
     }
 
     numberOfTextFields = 6;

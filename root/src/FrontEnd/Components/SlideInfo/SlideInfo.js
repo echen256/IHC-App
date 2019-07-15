@@ -15,14 +15,14 @@ export class SlideInfo extends CustomForm {
         var refs = this.state.refs;
 
 
-        this.data = {
-            tissueId: refs.current[0].export(),
-            tissueType: refs.current[1].export(),
-            dilutionFactor: refs.current[2].export(),
-            name: refs.current[3].export(),
-            catalog: refs.current[4].export(),
-            lot: refs.current[5].export(),
-            expirationDate: refs.current[6].export()
+        return {
+            tissueId: refs[0].current.export(),
+            tissueType: refs[1].current.export(),
+            dilutionFactor: refs[2].current.export(),
+            name: refs[3].current.export(),
+            catalog: refs[4].current.export(),
+            lot: refs[5].current.export(),
+            expirationDate: refs[6].current.export()
 
         }
     }
